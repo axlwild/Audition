@@ -1,0 +1,26 @@
+Técnica:
+ MUSIC
+ MUltiple Signal Classification.
+
+Las técnicas se clasifican entre (tipo) MUSIC y Beamforming.
+
+Desfase por medio de exponencial imaginaria.
+
+Recordatorio:
+desfasar una función en el tiempo es lo mismo que multiplicar la función por una exponencial en Fourier.
+
+
+Cliclicidad
+Bidireccional.
+
+
+Modelo  de señales capturadas
+
+X=SA
+
+A= Matriz de micrófonos (cada columna es un micro) con sus frecuencias
+S= es una señal de origen. (Ventanas por cada micrófono)
+X= señales capturasas en los micros.
+
+
+
