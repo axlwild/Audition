@@ -90,10 +90,10 @@ int main (int argc, char *argv[]) {
 	printf ("Window size: %d\n", jack_get_buffer_size (client));
 	
 	/* create the agent input port */
-	input_port = jack_port_register (client, "input", JACK_DEFAULT_AUDIO_TYPE,JackPortIsInput, 0);
+	input_port = jack_port_register (client, "input1", JACK_DEFAULT_AUDIO_TYPE,JackPortIsInput, 0);
 	
 	/* create the agent output port */
-	output_port = jack_port_register (client, "output",JACK_DEFAULT_AUDIO_TYPE,JackPortIsOutput, 0);
+	output_port = jack_port_register (client, "output1",JACK_DEFAULT_AUDIO_TYPE,JackPortIsOutput, 0);
 	
 	/* check that both ports were created succesfully */
 	if ((input_port == NULL) || (output_port == NULL)) {
