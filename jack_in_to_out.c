@@ -50,8 +50,8 @@ void jack_shutdown (void *arg){
 }
 
 
-int main (int argc, char *argv[]) {
-	const char *client_name = "in_to_out";
+//Crea al cliente externamente con un nombre de entrada y salida
+void create_client(const char *client_name,char *nameInput, char* nameOutput){
 	jack_options_t options = JackNoStartServer;
 	jack_status_t status;
 	
@@ -90,10 +90,10 @@ int main (int argc, char *argv[]) {
 	printf ("Window size: %d\n", jack_get_buffer_size (client));
 	
 	/* create the agent input port */
-	input_port = jack_port_register (client, "input1", JACK_DEFAULT_AUDIO_TYPE,JackPortIsInput, 0);
+	input_port = jack_port_register (client, nameInput, JACK_DEFAULT_AUDIO_TYPE,JackPortIsInput, 0);
 	
 	/* create the agent output port */
-	output_port = jack_port_register (client, "output1",JACK_DEFAULT_AUDIO_TYPE,JackPortIsOutput, 0);
+	output_port = jack_port_register (client, nameOutput,JACK_DEFAULT_AUDIO_TYPE,JackPortIsOutput, 0);
 	
 	/* check that both ports were created succesfully */
 	if ((input_port == NULL) || (output_port == NULL)) {
@@ -153,10 +153,13 @@ int main (int argc, char *argv[]) {
 	
 	
 	printf ("done.\n");
+}
+
+int main (int argc, char *argv[]) {
+	create_client("in_to_out","input1","output1");
+	
 	/* keep running until stopped by the user */
 	sleep (-1);
-	
-	
 	/* this is never reached but if the program
 	   had some other way to exit besides being killed,
 	   they would be important to call.

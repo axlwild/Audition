@@ -6,5 +6,6 @@ un solo agente)
 Para esto tuve que modificar el in_to_out para modificar el nombre del agente
 y así pudiese ejecutarlo correctamente.
 
-Se tiene que conectar manualmente a las salidad
+Se tiene que conectar manualmente a las salidas
+
 
