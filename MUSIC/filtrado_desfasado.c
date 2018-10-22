@@ -1,6 +1,6 @@
 /**
  * A simple example of how to do FFT with FFTW3 and JACK.
-gcc -std=gnu99 -o jack_filtrado.ej jack_fft_filtrado.c -ljack -lfftw3 -lm
+ gcc -std=gnu99 -o desfasado.ej filtrado_desfasado.c -ljack -lfftw3 -lm
  make -C ~/Escritorio/baudline_1.08_linux_x86_64/
 
  */
@@ -47,7 +47,7 @@ void shiftInTime(double complex *buff, int buff_size, int time){
 	}
 	*/
 	//printf("Después\n");
-	for(int i = 0; i < buff_size; ++i){
+	for(int i = 0; i < buff_size/2; ++i){
 		buff[i] *= cexp(-I*2* M_PI*time*i);
 	//	printf("%.1f + %.1f\n", creal(buff[i]),cimag(buff[i]));	
 	}
@@ -68,8 +68,7 @@ void filter(jack_default_audio_sample_t *buff, int buff_size){
 	fftw_execute(i_forward);
 	
 	// Aquí podriamos hacer algo con i_fft
-	//Intentando desfazar
-	//shiftInTime(i_fft, buff_size, 10);
+	
 	for(i = 0; i < buff_size; i++){
 		//Menores a esta frecuencia y a su espejo
 	    if(i < fd || i > buff_size-fd){
@@ -78,7 +77,8 @@ void filter(jack_default_audio_sample_t *buff, int buff_size){
     		o_fft[i] = i_fft[i];
 		}
 	}
-	
+	//Intentando desfazar
+	shiftInTime(o_fft, buff_size, 2200);
 
 	// Regresando al dominio del tiempo
 	fftw_execute(o_inverse);
